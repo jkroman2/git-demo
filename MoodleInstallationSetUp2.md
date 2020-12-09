@@ -10,7 +10,7 @@
 
     -   Name: *any_name_Org_convention*
 
-    -   Region: c*losest_to_your_location – to reduce latency*
+    -   Region: *closest_to_your_location – to reduce latency*
 
     -   Zone: *any_Zone*
 
@@ -88,16 +88,24 @@ sudo service fail2ban start
 sudo nano /etc/nginx/nginx.conf
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
->   **user \<current.user\>; worker_processes \<change amount to your VM core
->   number\>; multi_accept \<change to on\>; keepalive_timeout \<Change to 15\>;
->   server_tokens \< change to off \>; client_max_body_size \<Change value to
->   64m\>; \#gzip_proxied \<uncomment and set to value any\>; \#gzip_comp_level
->   \<uncomment and set tom value 2\>; \#gzip_types text/plain text/css
->   application/json application/javascript text/xml application/xml
->   application/xml+rss text/javascript; \<Uncomment\>**
+**user \<current.user\>;
+worker_processes \<change amount to your VM core number\>;
 
->   **Add the below part directly below this line include
->   /etc/nginx/sites-enabled/\*;**
+multi_accept \<change to on\>;
+
+keepalive_timeout \<Change to 15\>;
+
+server_tokens \< change to off \>; client_max_body_size \<Change value tov 64m\>;
+
+#gzip_proxied \<uncomment and set to value any\>;
+
+#gzip_comp_level <uncomment and set tom value 2\>;
+
+#gzip_types text/plain text/css application/json application/javascript text/xml
+application/xml application/xml+rss text/javascript; \<Uncomment\>**
+
+>   **Add the below part directly below this line include**
+>   /etc/nginx/sites-enabled/\*;
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 server {
@@ -163,8 +171,13 @@ sudo nano /etc/php/7.2/fpm/pool.d/www.conf
 
 -   Change the following lines by replacing the www-data with your username.
 
->   user = **\<current user\>** group = **\<current user\>** listen.owner =
->   **\<current user\>** listen.group = **\<current user\>**
+user = **\<current user\>**
+
+group = **\<current user\>** 
+
+listen.owner = **\<current user\>**
+
+listen.group = **\<current user\>**
 
 \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
@@ -387,8 +400,7 @@ sudo certbot certonly –nginx
 \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
 ###### Redirect HTTP Traffic to HTTPS
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 server {
 
     listen [::]:80;
@@ -533,27 +545,20 @@ types {font/x-woff woff2;}
 }
 
 }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+```
 Now you have enabled **SSL Hardening**, created a **Content Security Policy,
 X-XSS-Protection, Clickjacking, MIME Sniffing, Referrer Policy, Access Control
 Allow Origin**.
 
 -   Check if the configuration is correct and restart Nginx
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-sudo nginx -t
-sudo service nginx restart
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+        sudo nginx -t
+        sudo service nginx restart
 \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
 -   Renew SSL certificate with cronjob
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-sudo crontab -l \| { cat; echo "0 0,12 \* \* \* certbot renew
-\>/dev/null 2\>\&1"; } \| sudo crontab –
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        sudo crontab -l \| { cat; echo "0 0,12 \* \* \* certbot renew \>/dev/null 2\>\&1"; } \| sudo crontab –
 
 1.  **Setup Cloud SQL for Moodle LMS**
 
@@ -1008,7 +1013,7 @@ const _validatePayload = payload =\> {
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-![MoodleArchitectureGiagram](moodleArchitechture2.png)
+![](moodleArchitechture2.png)
 
 References:
 
