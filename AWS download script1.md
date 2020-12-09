@@ -16,8 +16,8 @@
 
 -   Key thing to note is that Aurora serverless cannot read from S3, as of April 2019.
 
-*import boto3* 
-*import pandas as pd*
+import boto3
+import pandas as pd
 
     cluster_arn = \<\#*Unique Amazon Resource Name: ARN associated with DB Instance*\>
 
