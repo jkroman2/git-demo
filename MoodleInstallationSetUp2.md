@@ -88,40 +88,41 @@ sudo service fail2ban start
 sudo nano /etc/nginx/nginx.conf
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**user \<current.user\>;
-worker_processes \<change amount to your VM core number\>;
+**user *\<current.user\>*;**
 
-multi_accept \<change to on\>;
+**worker_processes *\<change amount to your VM core number\>*;**
 
-keepalive_timeout \<Change to 15\>;
+**multi_accept *\<change value to On\>*;**
 
-server_tokens \< change to off \>; client_max_body_size \<Change value tov 64m\>;
+**keepalive_timeout *\<Change value to 15\>*;**
 
-#gzip_proxied \<uncomment and set to value any\>;
+**server_tokens *\< change to off \>*;**
 
-#gzip_comp_level <uncomment and set tom value 2\>;
+**client_max_body_size *\<Change value tov 64m\>*;**
 
-#gzip_types text/plain text/css application/json application/javascript text/xml
-application/xml application/xml+rss text/javascript; \<Uncomment\>**
+**#gzip_proxied *\<uncomment and set to value any\>*;**
 
->   **Add the below part directly below this line include**
->   /etc/nginx/sites-enabled/\*;
+**#gzip_comp_level *\<uncomment and set to value 2\>*;**
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**#gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript; \<Uncomment\>**
+
+**Add the below part directly below this line**
+
+***include /etc/nginx/sites-enabled/;***
+
+```
 server {
      listen 80 default_server;
      listen [::]:80 default_server;
      server_name \_;
      return 444;
 }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 -   Check Nginx configuration and restart the service
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-sudo nginx -t
-sudo service nginx restart
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        sudo nginx -t
+        sudo service nginx restart
 
 For Nginx to correctly serve PHP you also need to ensure the *fastcgi_param
 SCRIPT_FILENAME* directive is set, otherwise, you will receive a blank white
@@ -129,9 +130,7 @@ screen when accessing any PHP scripts.
 
 -   Open fastcgi_params file:
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-sudo nano /etc/nginx/fastcgi_params*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        sudo nano /etc/nginx/fastcgi_params
 
 -   Add the following at the end of the file
 
@@ -140,10 +139,8 @@ sudo nano /etc/nginx/fastcgi_params*
 Remove the default server blocks from Nginx. Otherwise you will get a 444-error
 response
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    sudo rm /etc/nginx/sites-available/default
-    sudo rm /etc/nginx/sites-enabled/default
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        sudo rm /etc/nginx/sites-available/default
+        sudo rm /etc/nginx/sites-enabled/default
 
 \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
