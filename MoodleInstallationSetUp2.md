@@ -1008,7 +1008,7 @@ const _validatePayload = payload =\> {
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-![MoodleArchitectureGiagram](moodleArchitechture2.jpg)
+![MoodleArchitectureGiagram](moodleArchitechture2.png)
 
 References:
 
